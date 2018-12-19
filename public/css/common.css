@@ -1,0 +1,9 @@
+.container{
+    max-width: 800px;
+    padding: 20px 30px 20px 30px;
+    text-align: left;
+}
+
+form .form-control{
+    line-height: 2;
+}

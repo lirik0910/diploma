@@ -1,0 +1,71 @@
+version: '2'
+services:
+
+  # Application
+  app:
+    build:
+      context: ./
+      dockerfile: infra/docker/app.dockerfile
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - database
+      - redis
+#
+#  # Cron worker
+#  cron:
+#    build:
+#      context: ./
+#      dockerfile: infra/docker/cron.dockerfile
+#    working_dir: /var/www
+#    volumes:
+#    - ./:/var/www
+#    environment:
+#    - DB_PORT=3306
+#    - DB_HOST=database
+#    depends_on:
+#    - database
+#    - redis
+
+  # Web Server
+  web:
+    build:
+      context: ./
+      dockerfile: infra/docker/web.dockerfile
+    working_dir: /var/www
+    volumes_from:
+      - app
+    ports:
+      - 80:80
+    depends_on:
+      - app
+
+  # Database
+  database:
+    image: postgres:10.5-alpine
+    environment:
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=homestead
+      - POSTGRES_DB=homestead
+    ports:
+      - 5432:5432
+    restart: always
+
+  # Redis
+  redis:
+    image: redis:3.2-alpine
+
+
+#  # Node
+#  node:
+#    restart: always
+#    image: node:10-alpine
+#    command: npm start
+#    working_dir: /var/www/node
+#    volumes:
+#      - .:/var/www
+#    ports:
+#      - 3000:3000
+#    depends_on:
+#      - database
