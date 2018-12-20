@@ -54,11 +54,11 @@ class VacancyController extends Controller
         $item = $this->model->find($id);
 
         $item->update($data);
-var_dump($data['criterias']); die;
+//var_dump($data['criterias']); die;
         foreach ($data['criterias'] as $key => $value){
             $criteria = Criteria::where('title', $key)->first();
 
-            $crit = CriteriaVacancyCollection::where(['vacancy_id', $item['id'], 'criterai_id' => $criteria->id])->first();
+            $crit = CriteriaVacancyCollection::where(['vacancy_id', $id, 'criterai_id' => $criteria->id])->first();
 
 
             $crit->update(['value' => $value]);
