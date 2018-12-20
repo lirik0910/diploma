@@ -3,32 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Projects;
-use App\Workers;
+use App\Http\Requests\CreateProjectRequest;
+use App\Project;
+//use App\Workers;
 
 class ProjectsController extends Controller
 {
     private $model;
     private $workersModel;
 
-    public function __construct(Projects $model, Workers $workersModel)
+    public function __construct(Project $model)
     {
         $this->model = $model;
-        $this->workersModel = $workersModel;
+        //$this->workersModel = $workersModel;
     }
 
-    public function create(Request $request)
+    public function create(CreateProjectRequest $request)
     {
-        $data = $request->only(['name', 'duration', 'technologies', 'communicative', 'speed']);
+        $data = $request->only(['name', 'description', 'status_id']);
 
         $project = $this->model->store($data);
 
-        return $project;
+        return $this->one($project['id']);
     }
 
-    public function one($id, Request $request)
+    public function one($id)
     {
+        $project = $this->model->one($id);
 
+        return $project;
     }
 
     public function all(Request $request)
@@ -38,12 +41,17 @@ class ProjectsController extends Controller
 
     public function update($id, Request $request)
     {
+        $data = $request->only(['name', 'description', 'status_id']);
+        $result = $this->model->upgrade($id, $data);
 
+        return response()->json($result);
     }
 
-    public function delete(Request $request)
+    public function delete($id)
     {
+        $project = $this->model->remove($id);
 
+        return redirect('/');
     }
 
     public function choose($id, Request $request)
@@ -201,7 +209,7 @@ class ProjectsController extends Controller
     }
 
 
-    /*public function checkTechnology($technologies, $skills, $type)
+    public function checkTechnology($technologies, $skills, $type)
     {
         foreach ($technologies as $technology){
             $arr = explode('.', $technology);
@@ -219,6 +227,6 @@ class ProjectsController extends Controller
                 var_dump($tK, $tV, $sK, $sV); die;
             }
         }
-    }*/
+    }
 
 }

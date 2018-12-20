@@ -15,19 +15,13 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')
+            $table->string('name', 255)
                 ->nullable(false);
-            $table->string('duration')
+            $table->string('description', 5000)
                 ->nullable(true);
-            $table->string('technologies')
-                ->nullable(true);
-            $table->string('communicative')
-                ->nullable(true);
-            $table->float('speed', 5, 2)
-                ->nullable(true)
-                ->default(0.0);
-            $table->string('priorities')
-                ->nullable(true);
+            $table->integer('status_id')
+                ->nullable(false)
+                ->default(1);
             $table->timestamps();
         });
     }

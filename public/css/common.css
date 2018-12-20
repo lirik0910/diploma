@@ -6,4 +6,10 @@
 
 form .form-control{
     line-height: 2;
+    margin-bottom: 20px;
+    clear: right;
+}
+
+form label{
+    margin-top: 10px;
 }

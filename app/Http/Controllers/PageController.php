@@ -2,56 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Criteria;
+use App\ProjectStatus;
 use Illuminate\Http\Request;
+use App\Project;
+use App\Vacancy;
 
 class PageController extends Controller
 {
-    public function addProject()
+    private $projectModel;
+    private $vacancyModel;
+
+    public function __construct(Project $projectModel, Vacancy $vacancyModel)
     {
-        $criterias = [
-            'duration' => [
-                'Короткий проект' => 'short',
-                'Средний' => 'normal',
-                'Длинный' => 'long'
-            ],
+        $this->projectModel = $projectModel;
+        $this->vacancyModel = $vacancyModel;
+    }
 
-            'technologies' => [
-                'frontend' => [
-                    'js' => [
-                        'AngularJs' => 'angular',
-                        'ReactJs' => 'react',
-                        'JQuery' => 'jquery',
-                    ]
-                ],
-                'backend' => [
-                    'php' => [
-                        'Laravel' => 'laravel',
-                        'Symfony' => 'symfony',
-                        'Yii' => 'yii'
-                    ],
-                    'node' => [
-                        'NestJs' => 'nest',
-                        'NextJs' => 'next',
-                        'ExpressJs' => 'express',
-                    ]
-                ]
-            ],
+    public function updateVacancy($id)
+    {
+        $item = $this->vacancyModel->find($id);
+        $defaultCriterias = Criteria::all();
+        //var_dump($item->criterias); die;
 
-            'speed' => [
-                'Высокая' => 'fast',
-                'Обычная' => 'normal',
-                'Низкая' => 'low'
-            ],
-
-            'communicative' => [
-                'Отсутствует' => 'none',
-                'Частичная' => 'part',
-                'Полная' => 'fully'
-            ]
-        ];
-
-        return view('content.add_project', [
-            'criterias' => $criterias,
+        return view('content.update_vacancy', [
+            'item' => $item,
+            'defaultCriterias' => $defaultCriterias
         ]);
     }
 
@@ -63,5 +39,38 @@ class PageController extends Controller
     public function one()
     {
 
+    }
+
+    public function projects(Request $request)
+    {
+        $items = $this->projectModel->many();
+
+        return view('content.projects', [
+            'items' => $items
+        ]);
+    }
+
+
+    public function addProject(Request $request)
+    {
+        $statuses = ProjectStatus::all();
+
+        return view('content.add_project', [
+            'statuses' => $statuses
+        ]);
+    }
+
+    public function updateProject($id, Request $request)
+    {
+        $statuses = ProjectStatus::all();
+        $defaultCriterias = Criteria::all();
+
+        $project = $this->projectModel->one($id);
+
+        return view('content.update_project', [
+            'statuses' => $statuses,
+            'item' => $project,
+            'defaultCriterias' => $defaultCriterias
+        ]);
     }
 }

@@ -15,11 +15,13 @@ class CreateWorkersTable extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable(false);
-            $table->float('communicative', 5, 2)->nullable(true)->default(0.0);
-            $table->float('speed', 5, 2)->nullable(true)->default(0.0);
-            $table->string('technologies')->nullable(true);
-            $table->string('duration')->nullable(true);
+            $table->string('name')
+                ->nullable(false);
+            $table->string('age')
+                ->nullable(true);
+            $table->boolean('status')
+                ->nullable(false)
+                ->default(false);
             $table->timestamps();
         });
     }

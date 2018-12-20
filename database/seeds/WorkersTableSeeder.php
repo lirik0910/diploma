@@ -11,44 +11,34 @@ class WorkersTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Workers::create([
-            'name' => 'Vasyl Kkk',
-            'duration' => 'long',
-            'technologies' => 'frontend.js;backend.php.laravel',
-            'communicative' => 0.7,
-            'speed' => 0.64,
+        App\Worker::create([
+            'name' => 'Алексей Воевода',
+            'age' => '23',
         ]);
 
-        App\Workers::create([
-            'name' => 'Michail',
-            'duration' => 'short',
-            'technologies' => 'frontend.js.angular;backend.php',
-            'communicative' => 0.6,
-            'speed' => 0.72,
+        App\Worker::create([
+            'name' => 'Николай Кузнецов',
+            'age' => '28',
         ]);
 
-        App\Workers::create([
-            'name' => 'Petro',
-            'duration' => 'normal',
-            'technologies' => 'backend.php.codeigniter',
-            'communicative' => 0.9,
-            'speed' => 0.31,
+        App\Worker::create([
+            'name' => 'Руслан Крылов',
+            'age' => '34',
         ]);
 
-        App\Workers::create([
-            'name' => 'Yana',
-            'duration' => 'long',
-            'technologies' => 'frontend.js.angular_react',
-            'communicative' => 0.8,
-            'speed' => 0.54,
+        App\Worker::create([
+            'name' => 'Анна Сташевская',
+            'age' => '21',
         ]);
 
-        App\Workers::create([
-            'name' => 'Diana',
-            'duration' => 'normal',
-            'technologies' => 'frontend.js.angular;backend.php,laravel',
-            'communicative' => 0.7,
-            'speed' => 0.78,
+        App\Worker::create([
+            'name' => 'Михаил Нигматулин',
+            'age' => '29',
+        ]);
+
+        App\Worker::create([
+            'name' => 'Полина Кузнецова',
+            'age' => '32',
         ]);
     }
 }

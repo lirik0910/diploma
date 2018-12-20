@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVacanciesTable extends Migration
+class CreateCharacteristicWorkerCollectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateVacanciesTable extends Migration
      */
     public function up()
     {
-        Schema::create('vacancies', function (Blueprint $table) {
+        Schema::create('characteristic_worker_collections', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type')
+            $table->integer('worker_id')
                 ->nullable(false);
-            $table->boolean('open')
-                ->nullable(false)
-                ->default(true);
-            $table->integer('project_id')
+            $table->integer('characteristic_id')
+                ->nullable(false);
+            $table->string('value')
                 ->nullable(false);
             $table->timestamps();
-
-            $table->index('project_id');
         });
     }
 
@@ -35,6 +32,6 @@ class CreateVacanciesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacancies');
+        Schema::dropIfExists('characteristic_worker_collections');
     }
 }

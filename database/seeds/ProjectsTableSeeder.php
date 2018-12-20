@@ -11,24 +11,16 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-
-        App\Projects::create([
+        App\Project::create([
             'name' => 'Mofy.life',
-            'duration' => 'long',
-            'technologies' => 'frontend.js.angular;backend.php.laravel',
-            'communicative' => 0.6,
-            'speed' => 0.64,
-            'priorities' => '8,6,5,10',
+            'description' => 'Cервис создания инстабуков.',
+            'status_id' => 3,
         ]);
 
-        App\Projects::create([
+        App\Project::create([
             'name' => 'Greenlight',
-            'duration' => 'normal',
-            'technologies' => 'frontend.js.react;backend.php.codeigniter',
-            'communicative' => 0.6,
-            'speed' => 0.64,
-            'priorities' => '9,7,7,6',
+            'description' => 'Сервис сток для продажи фотографий в цифровом и печатном виде.',
+            'status_id' => 1,
         ]);
     }
 }
