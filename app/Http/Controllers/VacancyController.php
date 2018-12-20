@@ -58,7 +58,7 @@ class VacancyController extends Controller
         foreach ($data['criterias'] as $key => $value){
             $criteria = Criteria::where('title', $key)->first();
 
-            $crit = CriteriaVacancyCollection::where(['vacancy_id' => $id, 'criterai_id' => $criteria->id])->first();
+            $crit = CriteriaVacancyCollection::where(['vacancy_id' => $id, 'criteria_id' => $criteria->id])->first();
 
 
             $crit->update(['value' => $value]);
