@@ -203,8 +203,9 @@ jQuery(document).ready(function(){
         e.preventDefault();
 
         let id = $(this).data('id');
-
+console.log(id);
         $('.worker_id_input').val(id);
+        console.log($('.worker_id_input').val());
         //$(this).
     });
 
