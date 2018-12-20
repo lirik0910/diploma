@@ -202,6 +202,9 @@ jQuery(document).ready(function(){
     $('.choose-worker').on('click', function (e) {
         e.preventDefault();
 
+        let id = $(this).data('id');
+
+        $('.worker_id_input').val(id);
         //$(this).
     });
 
@@ -209,6 +212,48 @@ jQuery(document).ready(function(){
         e.preventDefault();
 
 
+        let data = {
+            criterias: {}
+        };
+        let inputs = $(this).find('input');
+
+        inputs.each(function () {
+            if($(this).attr('name') === 'technologies'){
+                data['criterias'][$(this).attr('name')] = $(this).val();
+            } else{
+                data[$(this).attr('name')] = $(this).val();
+            }
+
+        });
+
+        let selects = $(this).find('select');
+
+        selects.each(function () {
+            data['criterias'][$(this).attr('name')] = $(this).val();
+        });
+
+        //console.log(location.href.split('/'));
+        let id = location.href.split('/')[4];
+
+
+        $.ajax({
+            url: '/vacancies/' . id,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            method: 'POST',
+            dataType: 'json',
+            data: data
+        }).done( (data) => {
+            location.reload();
+        }).fail(function (e) {
+            console.log('Error!');
+            /*            $('.modal__header').text('Ошибка');
+                        $('.modal__body').text('Вы ввели неправильный логин или пароль');
+                        $('.modal').fadeIn('400', function() {
+                            $('.modal__content').slideDown();
+                        });*/
+        });
     })
 
 });

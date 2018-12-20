@@ -49,7 +49,7 @@
 
                     <div class="vacancy-worker">
                         <label>Исполнитель</label>
-                        <input hidden name="value" value="@if($item->worker_id) {{ $item->worker_id }} @endif" />
+                        <input class="worker_id_input" hidden name="worker_id" value="@if($item->worker_id) {{ $item->worker_id }} @endif" />
                         <input disabled value="@if($item->worker_id) {{ $item->worker->name }} @endif" />
 
                         <button class="change-worker">Сменить исполнителя</button>
