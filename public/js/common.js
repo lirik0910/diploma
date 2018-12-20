@@ -199,15 +199,6 @@ jQuery(document).ready(function(){
 
     });
     
-    $('.choose-worker').on('click', function (e) {
-        e.preventDefault();
-
-        let id = $(this).data('id');
-console.log(id);
-        $('.worker_id_input').val(id);
-        console.log($('.worker_id_input').val());
-        //$(this).
-    });
 
     $('#update_vacancy-form').on('submit', function (e) {
         e.preventDefault();
@@ -247,6 +238,13 @@ console.log(data);
             data: data
         }).done( (data) => {
             location.reload();
+
+            $('.choose-worker').on('click', function (e) {
+                e.preventDefault();
+
+                let id = $(this).data('id');
+                $('.worker_id_input').val(id);
+            });
         }).fail(function (e) {
             console.log('Error!');
             /*            $('.modal__header').text('Ошибка');
