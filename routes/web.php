@@ -36,6 +36,7 @@ Route::post('/vacancies/add', 'VacancyController@create');
 Route::get('/vacancies/delete/{id}', 'VacancyController@delete');
 
 Route::get('/vacancies/{id}', 'PageController@updateVacancy');
+Route::post('/vacancies/{id}', 'VacancyController@update');
 
 Route::post('/workers/choose', 'VacancyController@choose');
 
