@@ -231,7 +231,7 @@ jQuery(document).ready(function(){
         selects.each(function () {
             data['criterias'][$(this).attr('name')] = $(this).val();
         });
-
+console.log(data);
         //console.log(location.href.split('/'));
         let id = location.href.split('/')[4];
 
