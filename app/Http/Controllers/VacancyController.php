@@ -64,7 +64,7 @@ class VacancyController extends Controller
             $crit->update(['value' => $value]);
         }
 
-        return redirect(Request::url());
+        return redirect($request->url());
 
     }
 
