@@ -41,8 +41,30 @@ class VacancyController extends Controller
 
     public function update($id, Request $request)
     {
-        $data = $$request->only([]);
+        $data = $request->only(['name', 'worker_id', 'criterias']);
 
+
+        if($data['worker_id']){
+            $data['status'] = true;
+        }
+
+        $criterias = $data['criterias'];
+        unset($data['criterias']);
+
+        $item = $this->model->find($id);
+
+        $item->update($data);
+
+        foreach ($criterias as $key => $value){
+            $criteria = Criteria::where('title', $key)->first();
+
+            $crit = CriteriaVacancyCollection::where(['vacancy_id', $item['id'], 'criterai_id' => $criteria->id])->first();
+
+
+            $crit->update(['value' => $value]);
+        }
+
+        return redirect(Request::url());
 
     }
 
@@ -182,7 +204,9 @@ class VacancyController extends Controller
             $Z[$key] = $r / $S;
         }
 
-        $overall = [];
+        $overall = [];    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
         foreach($evals as $idi => $eval){
             $tmp = 0;
             foreach($eval as $key => $value){
