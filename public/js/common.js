@@ -202,7 +202,7 @@ jQuery(document).ready(function(){
     $('.choose-worker').on('click', function (e) {
         e.preventDefault();
 
-        $(this).
+        //$(this).
     });
 
     $('#update_vacancy-form').on('submit', function (e) {
