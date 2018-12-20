@@ -204,9 +204,8 @@ class VacancyController extends Controller
             $Z[$key] = $r / $S;
         }
 
-        $overall = [];    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
+        $overall = [];
+
         foreach($evals as $idi => $eval){
             $tmp = 0;
             foreach($eval as $key => $value){
